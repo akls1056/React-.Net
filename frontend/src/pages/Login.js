@@ -1,16 +1,25 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col, Card, Nav } from 'react-bootstrap';
-import Register from './register';
 import { LinkContainer } from 'react-router-bootstrap';
+import axios from 'axios';
+
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Giriş işlemlerini burada gerçekleştirin
-    console.log('Email:', email);
-    console.log('Password:', password);
+    try {
+      const response = await axios.post('https://localhost:5001/api/auth/login', { email, password });
+      localStorage.setItem('token', response.data.token);
+      console.log('Logged in:', response.data);
+      // Başarılı giriş sonrasında yönlendirme yapılabilir
+      // Örneğin, anasayfaya yönlendirme: window.location.href = '/';
+    } catch (error) {
+      console.error('There was an error logging in!', error);
+      setError('Login failed. Please check your credentials.');
+    }
   };
 
   return (
@@ -40,6 +49,8 @@ function Login() {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </Form.Group>
+
+                {error && <p className="text-danger">{error}</p>}
 
                 <Button variant="primary" type="submit" className="w-100">
                   Login
