@@ -3,27 +3,21 @@ import { Form, Button, Container, Row, Col, Card, Nav } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import axios from 'axios';
 
-const Register = () => {
+function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (password !== confirmPassword) {
-      setError('Passwords do not match.');
-      return;
-    }
-
     try {
-      const response = await axios.post('https://localhost:5001/api/auth/register', { email, password });
-      console.log('Registered:', response.data);
-      // Başarılı kayıt sonrasında yönlendirme yapılabilir
-      // Örneğin, giriş sayfasına yönlendirme: window.location.href = '/login';
+      const response = await axios.post('https://localhost:5001/api/auth/register', {
+        email,
+        password
+      });
+      console.log('User registered successfully:', response.data);
+      // Başarılı bir şekilde kayıt olunduğunda yapılacak işlemler
     } catch (error) {
-      console.error('There was an error registering!', error);
-      setError('Registration failed. Please try again.');
+      console.error('Error registering user:', error);
     }
   };
 
@@ -55,27 +49,15 @@ const Register = () => {
                   />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
-                  <Form.Label>Confirm Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    placeholder="Confirm Password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                  />
-                </Form.Group>
-
-                {error && <p className="text-danger">{error}</p>}
-
                 <Button variant="primary" type="submit" className="w-100">
                   Register
                 </Button>
-                <Button variant="secondary" className="w-100 mt-4">
-                  <LinkContainer to='/login'>
-                    <Nav.Link>Login</Nav.Link>
-                  </LinkContainer>
-                </Button>
               </Form>
+              <Button variant="secondary" className="w-100 mt-4">
+                <LinkContainer to='/login'>
+                  <Nav.Link>Giriş Yap</Nav.Link>
+                </LinkContainer>
+              </Button>
             </Card.Body>
           </Card>
         </Col>

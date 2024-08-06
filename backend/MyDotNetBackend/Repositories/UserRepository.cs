@@ -1,28 +1,38 @@
+using MyDotNetBackend.Data;
 using MyDotNetBackend.Models;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace MyDotNetBackend.Repositories
 {
     public class UserRepository
     {
-        private static readonly List<User> Users = new List<User>();
+        private readonly ApplicationDbContext _context;
+
+        public UserRepository(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
         public User AddUser(User user)
         {
-            user.Id = Users.Count + 1;
-            Users.Add(user);
+            _context.Users.Add(user);
+            _context.SaveChanges();
             return user;
         }
 
-        public User GetUser(string email, string password)
+        public User? GetUser(string email, string password)  // Null olasılığını belirtmek için ? ekledik
         {
-            return Users.FirstOrDefault(u => u.Email == email && u.Password == password);
+            return _context.Users.FirstOrDefault(u => u.Email == email && u.Password == password);
         }
 
-        public User GetUserByEmail(string email)
+        public User? GetUserByEmail(string email)  // Null olasılığını belirtmek için ? ekledik
         {
-            return Users.FirstOrDefault(u => u.Email == email);
+            return _context.Users.FirstOrDefault(u => u.Email == email);
+        }
+
+        public List<User> GetAllUsers()
+        {
+            return _context.Users.ToList();
         }
     }
 }

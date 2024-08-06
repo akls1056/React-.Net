@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const Products = () => {
+function Products() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get('https://localhost:5001/api/product')
-      .then(response => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('https://localhost:5001/api/product');
         setProducts(response.data);
-      })
-      .catch(error => {
-        console.error('There was an error fetching the products!', error);
-      });
+      } catch (error) {
+        console.error('Error retrieving products:', error);
+      }
+    };
+
+    fetchProducts();
   }, []);
 
   return (
@@ -24,6 +27,6 @@ const Products = () => {
       </ul>
     </div>
   );
-};
+}
 
 export default Products;

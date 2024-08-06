@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using MyDotNetBackend.Data;
 using MyDotNetBackend.Models;
 using MyDotNetBackend.Repositories;
 using System.IdentityModel.Tokens.Jwt;
@@ -15,10 +16,10 @@ namespace MyDotNetBackend.Controllers
         private readonly IConfiguration _configuration;
         private readonly UserRepository _userRepository;
 
-        public AuthController(IConfiguration configuration)
+        public AuthController(IConfiguration configuration, ApplicationDbContext context)
         {
             _configuration = configuration;
-            _userRepository = new UserRepository();
+            _userRepository = new UserRepository(context);
         }
 
         [HttpPost("register")]
@@ -59,6 +60,12 @@ namespace MyDotNetBackend.Controllers
                 signingCredentials: creds);
 
             return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
+        }
+
+        [HttpGet("users")]
+        public IActionResult GetUsers()
+        {
+            return Ok(_userRepository.GetAllUsers());
         }
     }
 }

@@ -6,19 +6,19 @@ import axios from 'axios';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('https://localhost:5001/api/auth/login', { email, password });
-      localStorage.setItem('token', response.data.token);
-      console.log('Logged in:', response.data);
-      // Başarılı giriş sonrasında yönlendirme yapılabilir
-      // Örneğin, anasayfaya yönlendirme: window.location.href = '/';
+      const response = await axios.post('https://localhost:5001/api/auth/login', {
+        email,
+        password
+      });
+      console.log('User logged in successfully:', response.data);
+      const token = response.data.token;
+      localStorage.setItem('authToken', token); // Token'ı local storage'a kaydet
     } catch (error) {
-      console.error('There was an error logging in!', error);
-      setError('Login failed. Please check your credentials.');
+      console.error('Error logging in user:', error);
     }
   };
 
@@ -49,8 +49,6 @@ function Login() {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </Form.Group>
-
-                {error && <p className="text-danger">{error}</p>}
 
                 <Button variant="primary" type="submit" className="w-100">
                   Login

@@ -38,3 +38,13 @@ C:\Kod Dosyam\GithubRepos\React-.Net\backend\MyDotNetBackend\bin\Debug\net7.0\Mi
 C:\Kod Dosyam\GithubRepos\React-.Net\backend\MyDotNetBackend\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Kod Dosyam\GithubRepos\React-.Net\backend\MyDotNetBackend\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
 C:\Kod Dosyam\GithubRepos\React-.Net\backend\MyDotNetBackend\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Kod Dosyam\GithubRepos\React-.Net\backend\MyDotNetBackend\bin\Debug\net7.0\Humanizer.dll
+C:\Kod Dosyam\GithubRepos\React-.Net\backend\MyDotNetBackend\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.dll
+C:\Kod Dosyam\GithubRepos\React-.Net\backend\MyDotNetBackend\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Kod Dosyam\GithubRepos\React-.Net\backend\MyDotNetBackend\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Kod Dosyam\GithubRepos\React-.Net\backend\MyDotNetBackend\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Kod Dosyam\GithubRepos\React-.Net\backend\MyDotNetBackend\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
+C:\Kod Dosyam\GithubRepos\React-.Net\backend\MyDotNetBackend\bin\Debug\net7.0\Mono.TextTemplating.dll
+C:\Kod Dosyam\GithubRepos\React-.Net\backend\MyDotNetBackend\bin\Debug\net7.0\MySqlConnector.dll
+C:\Kod Dosyam\GithubRepos\React-.Net\backend\MyDotNetBackend\bin\Debug\net7.0\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Kod Dosyam\GithubRepos\React-.Net\backend\MyDotNetBackend\bin\Debug\net7.0\System.CodeDom.dll
