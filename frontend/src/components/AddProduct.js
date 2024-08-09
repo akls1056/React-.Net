@@ -1,14 +1,23 @@
 import React, { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import axios from 'axios';
 
 const AddProduct = () => {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
 
+  // Kullanıcının rolünü localStorage'dan alıyoruz
+  const role = localStorage.getItem('role');
+
+  // Eğer kullanıcı admin değilse ana sayfaya yönlendir
+  if (role !== 1) {
+    return <Navigate to="/" replace />;
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/product', { name, price });
+      const response = await axios.post('https://localhost:5001/api/product', { name, price });
       console.log('Product added:', response.data);
     } catch (error) {
       console.error('There was an error adding the product!', error);

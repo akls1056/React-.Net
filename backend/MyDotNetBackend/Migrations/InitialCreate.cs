@@ -9,8 +9,7 @@ public partial class InitialCreate : Migration
             name: "Users",
             columns: table => new
             {
-                Id = table.Column<int>(nullable: false)
-                    .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                Id = table.Column<int>(nullable: false).Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                 Email = table.Column<string>(nullable: false),
                 Password = table.Column<string>(nullable: false)
             },

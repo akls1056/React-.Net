@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button, Container, Row, Col, Card, Nav } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap';
 import axios from 'axios';
 
 function Login() {
@@ -9,16 +8,28 @@ function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     try {
       const response = await axios.post('https://localhost:5001/api/auth/login', {
         email,
         password
       });
-      console.log('User logged in successfully:', response.data);
+
+      // JWT token'ı ve kullanıcı rolünü localStorage'da sakla
       const token = response.data.token;
-      localStorage.setItem('authToken', token); // Token'ı local storage'a kaydet
+      localStorage.setItem('token', token);
+
+      const decodedToken = JSON.parse(atob(token.split('.')[1]));
+      localStorage.setItem('role', decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']);
+
+
+      localStorage.setItem('email', email);  // Kullanıcı e-posta bilgisini sakla
+      
+      // Başarılı girişten sonra yönlendirme yapılabilir
+      window.location.href = '/';
+      console.log(decodedToken);
     } catch (error) {
-      console.error('Error logging in user:', error);
+      console.error('There was an error logging in!', error);
     }
   };
 
@@ -52,11 +63,6 @@ function Login() {
 
                 <Button variant="primary" type="submit" className="w-100">
                   Login
-                </Button>
-                <Button variant="secondary" className="w-100 mt-4">
-                  <LinkContainer to='/register'>
-                    <Nav.Link>Register</Nav.Link>
-                  </LinkContainer>
                 </Button>
               </Form>
             </Card.Body>
